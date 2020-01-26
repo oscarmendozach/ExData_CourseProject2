@@ -23,5 +23,17 @@ mean(is.na(pm25data$Emissions))
 sum(pm25data$Emissions[pm25data$Emissions<0], na.rm=TRUE)
 #0
 
-pm25sub <- with(data = pm25data, tapply(Emissions, year , sum))
-str()
+#Question 1. Have total emissions decreased in the United States from 1999 to 2008?
+#Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005 and 2008
+
+#So what is asking the question is to sum up all the Emissions from all sources, from all fips
+#Firstly, the object pm25total is created using the with function, in which we summon the tapply function by year.
+
+pm25total <- with(data = pm25data, tapply(Emissions, year , sum))
+
+#And then we plot the variables using the plot function, and save it in a png file
+png(file = "plot1.png", width = 480, height = 480)
+plot(x = unique(pm25data$year), y = pm25total/1000000, xlab = "Years", ylab = "Total PM2.5 in millions of tons", pch = 19, col = "blue")
+dev.off()
+#Answer: According to the plot, the total emissions in the United States have been decreaing throughout the years.
+
