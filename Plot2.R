@@ -1,5 +1,4 @@
 pm25data <- readRDS(file = "summarySCC_PM25.rds")
-codes <- readRDS(file = "Source_Classification_Code.rds")
 
 #first run the str() function on both variables. 
 #str(pm25data)
@@ -11,9 +10,6 @@ codes <- readRDS(file = "Source_Classification_Code.rds")
 #$ type     : chr  "POINT" "POINT" "POINT" "POINT" ...
 #$ year     : int  1999 1999 1999 1999 1999 1999 1999 1999 1999 1999 ...
 
-#As showed before, most of the variables are "chr" type. the "type" column will first be set to a factor variable, for we will work and do summaries on this variable.
-
-pm25data$type <- as.factor(pm25data$type)
 
 #Check the integrity of data: number of NA's and number of negative numbers (negative measurements)
 

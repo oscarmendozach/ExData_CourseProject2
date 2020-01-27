@@ -22,3 +22,19 @@ mean(is.na(pm25data$Emissions))
 sum(pm25data$Emissions[pm25data$Emissions<0], na.rm=TRUE)
 #0
 
+#Question 3: Of the fourtypes of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from
+#1999 to 2008 for Baltimore City? Which have seen increases in emissions from 1999-2008? Use the ggplot2 plotting system to make a plot answer this question
+
+#First, the ggplot2 and dplyr packages are loaded
+library(ggplot2)
+library(dplyr)
+
+#Using the dplyr package, we will filter the rows from fips == 24510, group them by type and year, and finally summarise then by total sum
+
+pm25baltimore <-  pm25data %>% filter(fips == "24510") %>% group_by(fips, type, year) %>% summarise(Emissions=sum(Emissions, na.rm = TRUE))
+
+#Start the plot using the function ggplot and assign it to the variable called pm25baltimoreplot
+png(file = "plot3.R", width = 480, height = 480)
+pm25baltimoreplot <- ggplot(data = pm25baltimore, aes(x = year, y = Emissions)) + geom_point() + facet_grid(type~.)
+dev.off()
+
