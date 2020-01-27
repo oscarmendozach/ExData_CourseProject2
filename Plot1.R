@@ -13,8 +13,7 @@ codes <- readRDS(file = "Source_Classification_Code.rds")
 
 #As showed before, most of the variables are "chr" type. the "type" column will first be set to a factor variable, for we will work and do summaries on this variable.
 
-pm25data$type <- as.factor(pm25data$type)
-pm25data$year <- as.factor(pm25data$year)
+#pm25data$type <- as.factor(pm25data$type)
 
 #Check the integrity of data: number of NA's and number of negative numbers (negative measurements)
 
@@ -34,6 +33,7 @@ pm25total <- with(data = pm25data, tapply(Emissions, year , sum))
 #And then we plot the variables using the plot function, and save it in a png file
 png(file = "plot1.png", width = 480, height = 480)
 plot(x = unique(pm25data$year), y = pm25total/1000000, xlab = "Years", ylab = "Total PM2.5 in millions of tons", pch = 19, col = "blue")
+title("Total PM 2.5 Emissions in the United States.")
 dev.off()
-#Answer: According to the plot, the total emissions in the United States have been decreaing throughout the years.
+#Answer: According to the plot, the total emissions in the United States have been decreasing throughout the years.
 
