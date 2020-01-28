@@ -1,7 +1,7 @@
 pm25data <- readRDS(file = "summarySCC_PM25.rds")
 codes <- readRDS(file = "Source_Classification_Code.rds")
 
-#first run the str() function on both variables. 
+#first run the str() function. 
 #str(pm25data)
 #'data.frame':	6497651 obs. of  6 variables:
 #$ fips     : chr  "09001" "09001" "09001" "09001" ...
