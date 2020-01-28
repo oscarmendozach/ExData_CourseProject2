@@ -22,7 +22,7 @@ mean(is.na(pm25data$Emissions))
 sum(pm25data$Emissions[pm25data$Emissions<0], na.rm=TRUE)
 #0
 
-#Question 3: Of the fourtypes of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from
+#Question 3: Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from
 #1999 to 2008 for Baltimore City? Which have seen increases in emissions from 1999-2008? Use the ggplot2 plotting system to make a plot answer this question
 
 #First, the ggplot2 and dplyr packages are loaded
@@ -33,8 +33,19 @@ library(dplyr)
 
 pm25baltimore <-  pm25data %>% filter(fips == "24510") %>% group_by(fips, type, year) %>% summarise(Emissions=sum(Emissions, na.rm = TRUE))
 
-#Start the plot using the function ggplot and assign it to the variable called pm25baltimoreplot
-png(file = "plot3.R", width = 480, height = 480)
-pm25baltimoreplot <- ggplot(data = pm25baltimore, aes(x = year, y = Emissions)) + geom_point() + facet_grid(type~.)
+#for quality control, print the pm25baltimore dataframe
+
+print(pm25baltimore)
+
+#Start the plot device png()
+png(file = "plot3.png", width = 480, height = 480)
+#Using the function ggplot,  assign it to the variable called pm25baltimoreplot
+pm25baltimoreplot <- ggplot(data = pm25baltimore, aes(x = year, y = Emissions)) + geom_point() + facet_grid(type~.) + ggtitle("PM 2.5 Emissions in Baltimore by type of source") + ylab("PM 2.5 Emissions in tons")
+#Print the ggplot object
+print(pm25baltimoreplot)
+#disconnect the plot device
 dev.off()
 
+#Answer: A decrease in PM2.5 emissions has been seen in all the sources. However, not all of them share the same behaviour.
+#For instance, for "POINT" sources there's a huge spike in 2008.
+#For "NON-ROAD" and "ON-ROAD" sources, the decrement is almost negligible.
